@@ -88,7 +88,6 @@ app.post("/delete",function(req,res){
   const ListName = req.body.ListName;
   if(ListName == "Today"){
     Item.findByIdAndDelete(checkedItemId).then( err =>{
-      console.log("Sucessfuly Deleted Id:"+checkedItemId)
       res.redirect("/")
     }).catch(err=>{
       console.log("Error:"+err)

@@ -10,7 +10,6 @@ const _ = require("lodash")
 const app = express();
 
 app.set("view engine", "ejs");
-app.set('views', path.join(__dirname, 'src', 'pages'));
 app.use(bodyParser.urlencoded({
   extended: true
 }))
@@ -106,7 +105,7 @@ app.post("/delete",function(req,res){
 
 app.get("/:ListName", function(req, res) {
     const customListName = _.capitalize(req.params.ListName)
-    if(customListName=="about"){
+    if(customListName=="about"||customListName=="About"){
       res.render("about")
 
     }else{
@@ -126,8 +125,15 @@ app.get("/:ListName", function(req, res) {
       })
 
     }
+})
 
-
+app.post("/about",function(req,res){
+  if(req.body.aboutbutton==''){
+    res.redirect("/about")
+  }
+  else{
+    res.redirect("/")
+  }
 })
 
 let port = process.env.PORT;
